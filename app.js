@@ -40,22 +40,28 @@ client.on('message', async msg => {
     const command = args.shift().toLowerCase();
     console.log(`command: ${command}`);
     console.log(`args: ${args}`);
+    ////
     if (command === 'add') {
       const role = args[0].replace(/[<@&>]/g, '');
       msg.member.addRole(role);
+      logChannel.send(
+        `user ${msg.author.tag} sent the command \`${command} ${args.join(
+          ' '
+        )}\` in ${msg.channel}`
+      );
     }
+    ////
     if (command === 'say') {
       const sayMessage = args.join(' ');
       msg.delete().catch(o3o => {});
       msg.channel.send(sayMessage);
-      logChannel
-        .send(
-          `user ${msg.author.tag} sent the command \`${command} ${args.join(
-            ' '
-          )}\` in ${msg.channel}`
-        )
-        .catch(err => console.log(err));
+      logChannel.send(
+        `user ${msg.author.tag} sent the command \`${command} ${args.join(
+          ' '
+        )}\` in ${msg.channel}`
+      );
     }
+    ////
     if (command === 'delete') {
       const deleteCount = args;
       if (!deleteCount || deleteCount < 2 || deleteCount > 100)
@@ -73,6 +79,7 @@ client.on('message', async msg => {
           )
         );
     }
+    ////
     if (command === 'kick') {
       if (
         !msg.member.roles.some(r => ['big frog', 'Moderator'].includes(r.name))
@@ -105,6 +112,7 @@ client.on('message', async msg => {
         } for the reason: \`${reason}\``
       );
     }
+    ////
     if (command === 'ban') {
       if (!msg.member.roles.some(r => ['big frog'].includes(r.name)))
         return msg.reply(
