@@ -41,6 +41,19 @@ client.on('message', async msg => {
     console.log(`command: ${command}`);
     console.log(`args: ${args}`);
     ////
+    if (command === 'ping') {
+      const m = await msg.channel.send('Ping?');
+      m.edit(
+        `pong! latency is ${m.createdTimestamp -
+          msg.createdTimestamp}ms. API latency is ${Math.round(client.ping)}ms`
+      );
+      logChannel.send(
+        `user ${msg.author.tag} sent the command \`${command} ${args.join(
+          ' '
+        )}\` in ${msg.channel}`
+      );
+    }
+    ////
     if (command === 'add') {
       const role = args[0].replace(/[<@&>]/g, '');
       msg.member.addRole(role);
