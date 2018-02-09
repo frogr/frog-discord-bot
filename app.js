@@ -40,7 +40,10 @@ client.on('message', async msg => {
     const command = args.shift().toLowerCase();
     console.log(`command: ${command}`);
     console.log(`args: ${args}`);
-
+    if (command === 'add') {
+      const role = args[0].replace(/[<@&>]/g, '');
+      msg.member.addRole(role);
+    }
     if (command === 'say') {
       const sayMessage = args.join(' ');
       msg.delete().catch(o3o => {});
