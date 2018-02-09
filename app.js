@@ -47,32 +47,20 @@ client.on('message', async msg => {
         `pong! latency is ${m.createdTimestamp -
           msg.createdTimestamp}ms. API latency is ${Math.round(client.ping)}ms`
       );
-      logChannel.send(
-        `user ${msg.author.tag} sent the command \`${command} ${args.join(
-          ' '
-        )}\` in ${msg.channel}`
-      );
+      logOutput(msg, command, args);
     }
     ////
     if (command === 'add') {
       const role = args[0].replace(/[<@&>]/g, '');
       msg.member.addRole(role);
-      logChannel.send(
-        `user ${msg.author.tag} sent the command \`${command} ${args.join(
-          ' '
-        )}\` in ${msg.channel}`
-      );
+      logOutput(msg, command, args);
     }
     ////
     if (command === 'say') {
       const sayMessage = args.join(' ');
       msg.delete().catch(o3o => {});
       msg.channel.send(sayMessage);
-      logChannel.send(
-        `user ${msg.author.tag} sent the command \`${command} ${args.join(
-          ' '
-        )}\` in ${msg.channel}`
-      );
+      logOutput(msg, command, args);
     }
     ////
     if (command === 'delete') {
@@ -115,15 +103,11 @@ client.on('message', async msg => {
         .kick(reason)
         .catch(error => msg.reply(`couldn't kick because of: ${error}`));
       logChannel.send(
-        `user ${msg.author.tag} sent the command \`${command} ${args.join(
-          ' '
-        )}\` in ${msg.channel}.`
-      );
-      logChannel.send(
         `${member.user.tag} has been kicked by ${
           msg.author.tag
         } for the reason: \`${reason}\``
       );
+      logOutput(msg, command, args);
     }
     ////
     if (command === 'ban') {
@@ -146,17 +130,23 @@ client.on('message', async msg => {
         .ban(reason)
         .catch(error => msg.reply(`couldn't ban because of: ${error}`));
       logChannel.send(
-        `user ${msg.author.tag} sent the command \`${command} ${args.join(
-          ' '
-        )}\` in ${msg.channel}.`
-      );
-      logChannel.send(
         `${member.user.tag} has been kicked by ${
           msg.author.tag
         } for the reason: \`${reason}\``
       );
+      logOutput(msg, command, args);
     }
   }
 });
+
+const logOutput = (msg, command, args, msgs) => {
+  msg.guild.channels
+    .find('name', 'logs')
+    .send(
+      `user ${msg.author.tag} sent the command \`${command} ${args.join(
+        ' '
+      )}\` in ${msg.channel}`
+    );
+};
 
 client.login(token);
