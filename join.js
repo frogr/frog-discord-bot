@@ -1,4 +1,4 @@
-const join = () => {
+const join = (client, prefix) => {
   client.on('guildMemberAdd', member => {
     const memberLogChannel = member.guild.channels.find('name', 'member-logs');
     memberLogChannel.send(

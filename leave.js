@@ -1,4 +1,4 @@
-const leave = () => {
+const leave = (client, prefix) => {
   client.on('guildMemberRemove', member => {
     const memberLogChannel = member.guild.channels.find('name', 'member-logs');
     memberLogChannel.send(
