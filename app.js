@@ -5,28 +5,14 @@ const client = new Discord.Client();
 const token = process.env.DISCORD_TOKEN;
 const prefix = 'frog.';
 
+const join = require('./join');
+const leave = require('./leave');
+
 client.on('ready', () => {
   console.log(
     `frog bot is live and running as: ${client.user.tag} (${
       client.user.id
     }) on ${client.guilds.size} server(s)`
-  );
-});
-
-client.on('guildMemberAdd', member => {
-  const memberLogChannel = member.guild.channels.find('name', 'member-logs');
-  memberLogChannel.send(
-    `${member} has joined the server. they joined at ${
-      member.joinedAt
-    }. the server now has ${member.guild.memberCount} members.`
-  );
-});
-client.on('guildMemberRemove', member => {
-  const memberLogChannel = member.guild.channels.find('name', 'member-logs');
-  memberLogChannel.send(
-    `${member} has left the server. they joined at ${
-      member.joinedAt
-    }. the server now has ${member.guild.memberCount} members.`
   );
 });
 
