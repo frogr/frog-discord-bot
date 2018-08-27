@@ -1,11 +1,10 @@
-const checkBannable = () => {
-  if (!msg.member.roles.some(r => ['big frog, bot god'].includes(r.name)))
+const checkBannable = (msg, command, args, member) => {
+  if (!msg.member.roles.some(r => ['bot god'].includes(r.name)))
     return msg.reply(
       `${
         msg.author
-      } doesn't have the correct role to use the command: \`${command}.\``
+      } doesn't have the correct role to use the command: \`${command}\`.`
     );
-  let member = msg.mentions.members.first();
   if (!member) return msg.reply('no user matches this name');
   if (!member.bannable)
     return msg.reply(

@@ -7,6 +7,8 @@ const ping = require('./ping');
 const addRole = require('./addRole');
 const say = require('./say');
 const deleteMsgs = require('./deleteMsgs');
+const kick = require('./kick');
+const ban = require('./ban');
 
 const onMessage = (client, prefix) => {
   client.on('message', async msg => {

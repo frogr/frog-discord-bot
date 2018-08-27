@@ -1,4 +1,4 @@
-const checkRole = () => {
+const checkRole = msg => {
   if (
     !msg.member.roles.some(r =>
       ['big frog', 'Moderator', 'bot god'].includes(r.name)
@@ -7,7 +7,7 @@ const checkRole = () => {
     return msg.reply(
       `${
         msg.author
-      } doesn't have the correct role to use the command: \`${command}.\``
+      } doesn't have the correct role to use the command: \`${command}\`.`
     );
 };
 
