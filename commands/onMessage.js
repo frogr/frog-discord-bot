@@ -10,6 +10,7 @@ const deleteMsgs = require('./deleteMsgs');
 const kick = require('./kick');
 const ban = require('./ban');
 const squid = require('./squid');
+const gay = require('./gay');
 
 const onMessage = (client, prefix) => {
   client.on('message', async msg => {
@@ -38,9 +39,15 @@ const onMessage = (client, prefix) => {
       if (command === 'say') {
         say(msg, command, args);
       }
+
       // frog.squid
       if (command === 'squid') {
         squid(msg, command, args);
+      }
+
+      // frog.squid
+      if (command === 'gay') {
+        gay(msg, command, args);
       }
 
       // frog.delete {number of messages to delete}
