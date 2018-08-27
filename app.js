@@ -9,7 +9,7 @@ const logOutput = require('./logOutput');
 const onReady = require('./onReady');
 const join = require('./join');
 const leave = require('./leave');
-const onMessage = require('./onMessage');
+const onMessage = require('./commands/onMessage');
 
 onReady(client, prefix); // start bot
 join(client, prefix); // logs joining memebers

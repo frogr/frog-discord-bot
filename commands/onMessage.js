@@ -1,4 +1,7 @@
-const logOutput = require('./logOutput');
+const logOutput = require('../logOutput');
+const ping = require('./ping');
+const addRole = require('./addRole');
+const say = require('./say');
 
 const onMessage = (client, prefix) => {
   client.on('message', async msg => {
@@ -16,39 +19,19 @@ const onMessage = (client, prefix) => {
 
       if (command === 'ping') {
         const m = await msg.channel.send('Ping?');
-        m.edit(
-          `pong! latency is ${m.createdTimestamp -
-            msg.createdTimestamp}ms. API latency is ${Math.round(
-            client.ping
-          )}ms`
-        );
-        logOutput(msg, command, args);
+        ping(m, msg, command, args, client);
       }
 
       // frog.add {role}
 
       if (command === 'add') {
-        const role = args[0].replace(/[<@&>]/g, '');
-        msg.member.addRole(role);
-        logOutput(msg, command, args);
+        addRole(msg, command, args, client);
       }
 
       // frog.say {message}
 
       if (command === 'say') {
-        if (
-          command.includes('@everyone') ||
-          command.includes('@here') ||
-          args.includes('@everyone') ||
-          command.includes('@here')
-        ) {
-          msg.channel.send('no');
-        } else {
-          const sayMessage = args.join(' ');
-          msg.delete().catch(o3o => {});
-          msg.channel.send(sayMessage);
-          logOutput(msg, command, args);
-        }
+        say(msg, command, args, client);
       }
 
       // frog.delete {number of messages to delete}
