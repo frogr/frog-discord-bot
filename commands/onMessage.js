@@ -1,7 +1,10 @@
-const logOutput = require('../logOutput');
+const logOutput = require('../helpers/logOutput');
+const checkRole = require('../helpers/checkRole');
+
 const ping = require('./ping');
 const addRole = require('./addRole');
 const say = require('./say');
+const deleteMsgs = require('./deleteMsgs');
 
 const onMessage = (client, prefix) => {
   client.on('message', async msg => {
@@ -16,57 +19,28 @@ const onMessage = (client, prefix) => {
       console.log(`args: ${args}`);
 
       // frog.ping
-
       if (command === 'ping') {
         const m = await msg.channel.send('Ping?');
         ping(m, msg, command, args, client);
       }
 
       // frog.add {role}
-
       if (command === 'add') {
         addRole(msg, command, args, client);
       }
 
       // frog.say {message}
-
       if (command === 'say') {
         say(msg, command, args, client);
       }
 
       // frog.delete {number of messages to delete}
-
       if (command === 'delete') {
-        if (
-          !msg.member.roles.some(r =>
-            ['big frog', 'Moderator', 'bot god'].includes(r.name)
-          )
-        )
-          return msg.reply(
-            `${
-              msg.author
-            } doesn't have the correct role to use the command: \`${command}.\``
-          );
-
-        const deleteCount = args;
-        if (!deleteCount || deleteCount < 2 || deleteCount > 100)
-          return msg.reply(
-            `command \`${command}\` with argument \`${args}\` is invalid. choose a number between 2 and 10`
-          );
-        msg.channel
-          .fetchMessages({ limit: deleteCount })
-          .then(msgs => msg.channel.bulkDelete(msgs))
-          .then(msgs =>
-            logChannel.send(
-              `user ${msg.author.tag} sent the command \`${command} ${args.join(
-                ' '
-              )}\` in ${msg.channel}. this deleted ${msgs.size} messages.`
-            )
-          );
+        checkRole(msg);
+        delete (msg, command, args, client);
       }
 
       // frog.kick {user} {reason}
-
       if (command === 'kick') {
         if (
           !msg.member.roles.some(r =>
@@ -99,7 +73,6 @@ const onMessage = (client, prefix) => {
       }
 
       // frog.ban {user} {reason}
-
       if (command === 'ban') {
         if (!msg.member.roles.some(r => ['big frog, bot god'].includes(r.name)))
           return msg.reply(
