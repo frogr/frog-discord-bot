@@ -41,7 +41,7 @@ const onMessage = (client, prefix) => {
       // frog.delete {number of messages to delete}
       if (command === 'delete') {
         checkRole(msg);
-        delete (msg, command, args);
+        deleteMsgs(msg, command, args);
       }
 
       // frog.kick {user} {reason}
