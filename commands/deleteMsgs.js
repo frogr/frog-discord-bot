@@ -1,4 +1,4 @@
-const deleteMsgs = (msg, command, args, client) => {
+const deleteMsgs = (msg, command, args) => {
   const deleteCount = args;
   if (!deleteCount || deleteCount < 2 || deleteCount > 100)
     return msg.reply(

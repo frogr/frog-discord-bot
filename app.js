@@ -5,7 +5,7 @@ const client = new Discord.Client();
 const token = process.env.DISCORD_TOKEN;
 const prefix = 'frog.';
 
-const logOutput = require('./logOutput');
+const logOutput = require('./helpers/logOutput');
 const onReady = require('./onReady');
 const join = require('./join');
 const leave = require('./leave');

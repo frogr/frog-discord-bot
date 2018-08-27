@@ -1,6 +1,6 @@
-const logOutput = require('../logOutput');
+const logOutput = require('../helpers/logOutput');
 
-const say = (msg, command, args, client) => {
+const say = (msg, command, args) => {
   if (
     command.includes('@everyone') ||
     command.includes('@here') ||

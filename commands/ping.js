@@ -1,4 +1,4 @@
-const logOutput = require('../logOutput');
+const logOutput = require('../helpers/logOutput');
 
 // frog.ping
 const ping = (m, msg, command, args, client) => {

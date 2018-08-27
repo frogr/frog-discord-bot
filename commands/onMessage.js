@@ -1,5 +1,7 @@
 const logOutput = require('../helpers/logOutput');
 const checkRole = require('../helpers/checkRole');
+const checkKickable = require('../helpers/checkKickable');
+const checkBannable = require('../helpers/checkBannable');
 
 const ping = require('./ping');
 const addRole = require('./addRole');
@@ -26,78 +28,33 @@ const onMessage = (client, prefix) => {
 
       // frog.add {role}
       if (command === 'add') {
-        addRole(msg, command, args, client);
+        addRole(msg, command, args);
       }
 
       // frog.say {message}
       if (command === 'say') {
-        say(msg, command, args, client);
+        say(msg, command, args);
       }
 
       // frog.delete {number of messages to delete}
       if (command === 'delete') {
         checkRole(msg);
-        delete (msg, command, args, client);
+        delete (msg, command, args);
       }
 
       // frog.kick {user} {reason}
       if (command === 'kick') {
-        if (
-          !msg.member.roles.some(r =>
-            ['big frog', 'Moderator', 'bot god'].includes(r.name)
-          )
-        )
-          return msg.reply(
-            `${
-              msg.author
-            } doesn't have the correct role to use the command: \`${command}.\``
-          );
         let member = msg.mentions.members.first();
-        if (!member) return msg.reply('no user matches this name');
-        if (!member.kickable)
-          return msg.reply(
-            `bot does not have proper permissions to use the command: \`${command}.\``
-          );
-        let reason = args.slice(1).join(' ');
-        if (!reason)
-          return msg.reply(`\`${command}.\` requires a reason argument`);
-        await member
-          .kick(reason)
-          .catch(error => msg.reply(`couldn't kick because of: ${error}`));
-        logChannel.send(
-          `${member.user.tag} has been kicked by ${
-            msg.author.tag
-          } for the reason: \`${reason}\``
-        );
-        logOutput(msg, command, args);
+        checkRole(msg);
+        checkKickable(msg, command, args, member);
+        await kick(msg, command, args, member);
       }
 
       // frog.ban {user} {reason}
       if (command === 'ban') {
-        if (!msg.member.roles.some(r => ['big frog, bot god'].includes(r.name)))
-          return msg.reply(
-            `${
-              msg.author
-            } doesn't have the correct role to use the command: \`${command}.\``
-          );
         let member = msg.mentions.members.first();
-        if (!member) return msg.reply('no user matches this name');
-        if (!member.bannable)
-          return msg.reply(
-            `bot does not have proper permissions to use the command: \`${command}.\``
-          );
-        let reason = args.slice(1).join(' ');
-        if (!reason)
-          return msg.reply(`\`${command}.\` requires a reason argument`);
-        await member
-          .ban(reason)
-          .catch(error => msg.reply(`couldn't ban because of: ${error}`));
-        logChannel.send(
-          `${member.user.tag} has been kicked by ${
-            msg.author.tag
-          } for the reason: \`${reason}\``
-        );
-        logOutput(msg, command, args);
+        checkBannable(msg, command, args, member);
+        await ban(msg, command, args, member);
       }
     }
   });
