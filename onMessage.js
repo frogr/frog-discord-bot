@@ -54,6 +54,17 @@ const onMessage = (client, prefix) => {
       // frog.delete {number of messages to delete}
 
       if (command === 'delete') {
+        if (
+          !msg.member.roles.some(r =>
+            ['big frog', 'Moderator', 'bot god'].includes(r.name)
+          )
+        )
+          return msg.reply(
+            `${
+              msg.author
+            } doesn't have the correct role to use the command: \`${command}.\``
+          );
+
         const deleteCount = args;
         if (!deleteCount || deleteCount < 2 || deleteCount > 100)
           return msg.reply(
@@ -107,7 +118,7 @@ const onMessage = (client, prefix) => {
       // frog.ban {user} {reason}
 
       if (command === 'ban') {
-        if (!msg.member.roles.some(r => ['big frog'].includes(r.name)))
+        if (!msg.member.roles.some(r => ['big frog, bot god'].includes(r.name)))
           return msg.reply(
             `${
               msg.author
