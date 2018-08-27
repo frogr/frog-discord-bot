@@ -11,9 +11,10 @@ const join = require('./join');
 const leave = require('./leave');
 const onMessage = require('./onMessage');
 
-onReady(client, prefix);
-join(client, prefix);
-leave(client, prefix);
-onMessage(client, prefix);
+onReady(client, prefix); // start bot
+join(client, prefix); // logs joining memebers
+leave(client, prefix); // logs leaving members
+onMessage(client, prefix); // message-based commands
+// message-based logs go in logOutput.js
 
 client.login(token);

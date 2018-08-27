@@ -11,7 +11,9 @@ const onMessage = (client, prefix) => {
       const command = args.shift().toLowerCase();
       console.log(`command: ${command}`);
       console.log(`args: ${args}`);
-      ////
+
+      // frog.ping
+
       if (command === 'ping') {
         const m = await msg.channel.send('Ping?');
         m.edit(
@@ -22,15 +24,18 @@ const onMessage = (client, prefix) => {
         );
         logOutput(msg, command, args);
       }
-      ////
+
+      // frog.add {role}
+
       if (command === 'add') {
         const role = args[0].replace(/[<@&>]/g, '');
         msg.member.addRole(role);
         logOutput(msg, command, args);
       }
-      ////
+
+      // frog.say {message}
+
       if (command === 'say') {
-        ////
         if (
           command.includes('@everyone') ||
           command.includes('@here') ||
@@ -45,7 +50,9 @@ const onMessage = (client, prefix) => {
           logOutput(msg, command, args);
         }
       }
-      ////
+
+      // frog.delete {number of messages to delete}
+
       if (command === 'delete') {
         const deleteCount = args;
         if (!deleteCount || deleteCount < 2 || deleteCount > 100)
@@ -63,11 +70,13 @@ const onMessage = (client, prefix) => {
             )
           );
       }
-      ////
+
+      // frog.kick {user} {reason}
+
       if (command === 'kick') {
         if (
           !msg.member.roles.some(r =>
-            ['big frog', 'Moderator'].includes(r.name)
+            ['big frog', 'Moderator', 'bot god'].includes(r.name)
           )
         )
           return msg.reply(
@@ -94,7 +103,9 @@ const onMessage = (client, prefix) => {
         );
         logOutput(msg, command, args);
       }
-      ////
+
+      // frog.ban {user} {reason}
+
       if (command === 'ban') {
         if (!msg.member.roles.some(r => ['big frog'].includes(r.name)))
           return msg.reply(
