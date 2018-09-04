@@ -1,6 +1,6 @@
 const logOutput = require('../helpers/logOutput');
 
-const gay = (msg, commands, args) => {
+const gay = (msg, command, args) => {
   const counter = Math.floor(Math.random() * 3) + 1;
   const gayTweets = [
     'https://twitter.com/frog_js/status/1029523590226440192',
