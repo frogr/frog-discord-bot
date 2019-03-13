@@ -19,7 +19,7 @@ const onMessage = (client, prefix) => {
     if (msg.content.includes('hi frog')) {
       msg.channel.send('hi');
     }
-    if (msg.content.includes('n')) {
+    if (msg.content === 'n') {
       msg.channel.send('i');
     }
 
