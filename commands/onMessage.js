@@ -6,6 +6,7 @@ const checkBannable = require('../helpers/checkBannable');
 const ping = require('./ping');
 const addRole = require('./addRole');
 const say = require('./say');
+const specialSay = require('./specialSay');
 const deleteMsgs = require('./deleteMsgs');
 const kick = require('./kick');
 const ban = require('./ban');
