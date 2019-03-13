@@ -4,7 +4,8 @@
   "description": "Discord bot for a private discord server for my friends",
   "main": "app.js",
   "dependencies": {
-    "discord.js": "11.4.2"
+    "discord.js": "11.4.2",
+    "dotenv": "^7.0.0"
   },
   "devDependencies": {},
   "scripts": {
