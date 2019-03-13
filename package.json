@@ -1,0 +1,21 @@
+{
+  "name": "frog_bot",
+  "version": "1.0.0",
+  "description": "Discord bot for a private discord server for my friends",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frogr/frog_bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frogr/frog_bot/issues"
+  },
+  "homepage": "https://github.com/frogr/frog_bot#readme"
+}
