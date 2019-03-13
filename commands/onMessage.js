@@ -7,6 +7,7 @@ const ping = require('./ping');
 const addRole = require('./addRole');
 const say = require('./say');
 const deleteMsgs = require('./deleteMsgs');
+const deleted = require('./deleted');
 const kick = require('./kick');
 const ban = require('./ban');
 const squid = require('./squid');
@@ -15,7 +16,15 @@ const gay = require('./gay');
 const onMessage = (client, prefix) => {
   client.on('message', async msg => {
     const logChannel = msg.guild.channels.find('name', 'logs');
-    // frog.say {message}
+    const deletedMsgs = msg.guild.channels.find('name', 'deleted');
+
+    // check if deleted
+    if (msg.deleted) {
+      console.log('deleted message');
+      deleted(msg);
+    }
+
+    // frog replies
     if (msg.content.includes('hi frog')) {
       msg.channel.send('hi');
     }
