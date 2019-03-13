@@ -15,6 +15,14 @@ const gay = require('./gay');
 const onMessage = (client, prefix) => {
   client.on('message', async msg => {
     const logChannel = msg.guild.channels.find('name', 'logs');
+    // frog.say {message}
+    if (msg.content.includes('hi frog')) {
+      specialSay(msg);
+    }
+    if (msg.content.includes('n')) {
+      specialSay(msg);
+    }
+
     if (msg.content.startsWith(prefix)) {
       const args = msg.content
         .slice(prefix.length)
@@ -31,9 +39,10 @@ const onMessage = (client, prefix) => {
       }
 
       // frog.add {role}
-      if (command === 'add') {
-        addRole(msg, command, args);
-      }
+      // DOESNT WORK RN PLS DONT INCLUDE
+      // if (command === 'add') {
+      //   addRole(msg, command, args);
+      // }
 
       // frog.say {message}
       if (command === 'say') {
