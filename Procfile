@@ -1,1 +1,2 @@
-npm -Dserver.port=$PORT start
+bot: node app.js
+web: npm -v
