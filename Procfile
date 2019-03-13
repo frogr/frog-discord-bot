@@ -1,2 +1,2 @@
 bot: node app.js
-web: npm -v
+web: node app.js
