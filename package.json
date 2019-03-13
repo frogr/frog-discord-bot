@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Discord bot for a private discord server for my friends",
   "main": "app.js",
-  "dependencies": {},
+  "dependencies": {
+    "discord.js": "11.4.2"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
