@@ -5,7 +5,7 @@ const say = (msg, command, args) => {
     command.includes('@everyone') ||
     command.includes('@here') ||
     args.includes('@everyone') ||
-    command.includes('@here')
+    args.includes('@here')
   ) {
     msg.channel.send('no');
   } else {
